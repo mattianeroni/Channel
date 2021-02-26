@@ -28,6 +28,7 @@ struct chan {
     ready = false;
     T i = buffer[0];
     buffer.erase(buffer.begin());
+    size--;
     // Release the locker
     lock.unlock();
     // Notify one of the threads waiting
@@ -47,6 +48,7 @@ struct chan {
     // Operate on the buffer
     ready = false;
     buffer.push_back(element);
+    size++;
     // release the locker
     lock.unlock();
     cv.notify_one();
